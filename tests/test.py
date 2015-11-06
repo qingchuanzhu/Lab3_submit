@@ -14,7 +14,8 @@ class StandAloneTests(TestCase):
         computed_result = auth.highest_affinity(site_list, user_list)
         expected_result = ("a.com", "b.com")
 
-        assert computed_result == expected_result
+	self.assertEqual(computed_result, expected_result)
+        #assert computed_result == expected_result
 
 
 
