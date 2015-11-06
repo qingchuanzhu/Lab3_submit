@@ -15,7 +15,6 @@ class StandAloneTests(TestCase):
         expected_result = ("a.com", "b.com")
 
 	self.assertEqual(computed_result, expected_result)
-	self.assertEqual(0,1)
         #assert computed_result == expected_result
 
 
