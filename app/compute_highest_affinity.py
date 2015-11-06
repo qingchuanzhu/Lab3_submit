@@ -1,4 +1,5 @@
 #! /usr/bin/python
+"""This is the target file for Lab3 """
 
 # No need to process files and manipulate strings - we will
 # pass in lists (of equal length) that correspond to
@@ -8,48 +9,50 @@
 # See the test cases for more details.
 
 def highest_affinity(site_list, user_list):
+    """ Compute the highest affinity taken site list and user list"""
     # Step1 construct the dict {site => name list}
-    siteNameDict = giveMeDictNameList(site_list, user_list)
-    
+    sitenamedict = givemedictnamelist(site_list, user_list)
+
     # Step2 construct dict of {site = > name_list len}
-    siteNameLenDict = dict()
-    for k in sorted(siteNameDict):
-        siteNameLenDict[k] = len(siteNameDict[k])
-    
+    sitenamelendict = dict()
+    for k in sorted(sitenamedict):
+        sitenamelendict[k] = len(sitenamedict[k])
+
     # Step3 for each pair of site compute number of users, log the max pair in Tuple
-    MAX = 0
-    siteNameSetList = list(set(site_list))
-    numOfSite = len(siteNameSetList)
-    for i in range(numOfSite):
-        for j in range(i+1,numOfSite):
-            pairCount = 0
-            elem1 = siteNameSetList[i]
-            elem2 = siteNameSetList[j]
-            count1 = siteNameLenDict[elem1]
-            count2 = siteNameLenDict[elem2]
+    current_max = 0
+    sitenamesetlist = list(set(site_list))
+    numofsite = len(sitenamesetlist)
+    for i in range(numofsite):
+        for j in range(i+1, numofsite):
+            paircount = 0
+            elem1 = sitenamesetlist[i]
+            elem2 = sitenamesetlist[j]
+            count1 = sitenamelendict[elem1]
+            count2 = sitenamelendict[elem2]
             if count1 < count2:
-                lessL = siteNameDict[elem1]
-                largeL = siteNameDict[elem2]
+                lessl = sitenamedict[elem1]
+                largel = sitenamedict[elem2]
             else:
-                lessL = siteNameDict[elem2]
-                largeL = siteNameDict[elem1]
-            
-            for name in lessL:
-                if(name in largeL):
-                    pairCount = pairCount +1
-        
-            if(pairCount > MAX):
-                largePair = (elem1, elem2)
-                MAX = pairCount
+                lessl = sitenamedict[elem2]
+                largel = sitenamedict[elem1]
 
-    listPair = list(largePair)
-    listPair.sort()
-    return tuple(listPair)
+            for name in lessl:
+                if name in largel:
+                    paircount = paircount +1
 
-def giveMeDictNameList(site_list, user_list):
-    nameDict = dict()
+            if paircount > current_max:
+                largepair = (elem1, elem2)
+                current_max = paircount
+
+    listpair = list(largepair)
+    listpair.sort()
+    return tuple(listpair)
+
+def givemedictnamelist(site_list, user_list):
+    """ compute the dictionary of site => user list"""
+    namedict = dict()
     for i in range(len(site_list)):
         site = site_list[i]
-        nameDict[site] = (nameDict.get(site, set()))
-        nameDict[site].add(user_list[i])
-    return nameDict
+        namedict[site] = (namedict.get(site, set()))
+        namedict[site].add(user_list[i])
+    return namedict
