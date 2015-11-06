@@ -12,7 +12,7 @@ class StandAloneTests(TestCase):
         site_list = ["a.com", "b.com", "a.com", "b.com", "a.com", "c.com"]
         user_list = ["andy", "andy", "bob", "bob", "charlie", "charlie"]
         computed_result = auth.highest_affinity(site_list, user_list)
-        expected_result = ("a.com", "b.com")
+        expected_result = ("c.com", "b.com")
 
 	self.assertEqual(computed_result, expected_result)
         #assert computed_result == expected_result
